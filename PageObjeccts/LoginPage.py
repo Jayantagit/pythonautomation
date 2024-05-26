@@ -1,4 +1,8 @@
 from selenium.webdriver.common.by import By
+
+from PageObjeccts.AccountsPage import AccountsPage
+
+
 class LoginPage:
 
     inputTxt_email_id="input-email"
@@ -9,7 +13,10 @@ class LoginPage:
         self.driver=driver
 
     def doLogin(self,username,password):
+        self.driver.find_element(By.ID, self.inputTxt_email_id).clear()
         self.driver.find_element(By.ID,self.inputTxt_email_id).send_keys(username)
+        self.driver.find_element(By.ID, self.inputTxt_password_id).clear()
         self.driver.find_element(By.ID, self.inputTxt_password_id).send_keys(password)
         self.driver.find_element(By.XPATH, self.btn_Login_xpath).click()
+        return AccountsPage(self.driver)
 
